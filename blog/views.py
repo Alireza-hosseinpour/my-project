@@ -1,8 +1,11 @@
 from django.shortcuts import get_object_or_404, render
-
+from django.urls import reverse
 from blog.models import Post,Category
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
 def blog(request):
     posts = Post.objects.filter(status=1)
     posts = Paginator(posts,2)
